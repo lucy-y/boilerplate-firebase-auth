@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 // eslint-disable-next-line
 import { async } from "@firebase/util";
 
-export default function Login() {
+export default function Signup() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -32,7 +32,7 @@ export default function Login() {
     const handlePassword = (e) => {
         setPassword(e.target.value);
         // eslint-disable-next-line
-        const regex = /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+])(?!.*[^a-zA-z0-9$`~!@$!%*#^?&\\(\\)\-_=+]).{6,20}$/;
+        const regex = /^(?=.*[0-9]).{6,20}$/;
         if (regex.test(e.target.value)) {
             setPasswordValid(true);
         } else {
@@ -46,10 +46,29 @@ export default function Login() {
     }
 
     const auth = getAuth();
-    const signin = async () => {
-        const result = await signInWithEmailAndPassword(auth, email, password);
-        console.log(result);
-        alert(`${email}님이 로그인에 성공했습니다.`);
+    useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+            console.log(user);
+        })
+        // eslint-disable-next-line
+    }, []);
+
+    const signup = async () => {
+        // eslint-disable-next-line
+        const result = await createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Signed in 
+                const user = userCredential.user;
+                console.log(user);
+                alert(`${email}님이 회원가입에 성공했습니다.`);
+                
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                alert(`${email}님이 회원가입에 실패했습니다.\n사유: [${errorCode}] ${errorMessage}`);
+                console.log(error);
+            });
     }
 
     return (
@@ -78,20 +97,20 @@ export default function Login() {
                 <div class="inputTitle">비밀번호</div>
                 <div class="inputWrap">
                     <input
-                        class="input" type="password" placeholder="영문, 숫자, 특수문자 포함 6자 이상"
+                        class="input" type="password" placeholder="6자 이상"
                         value={password} onChange={handlePassword}
                     />
                 </div>
                 <div className="errorMessageWrap">
                     {!passwordValid && password.length > 0 && (
-                        <div>영문, 숫자, 특수문자 포함 6자 이상 입력해주세요.</div>
+                        <div>6자 이상 입력해주세요.</div>
                     )}
 
                 </div>
             </div>
 
             <div>
-                <button onClick={signin} disabled={notAllow} class="bottomButton">로그인</button>
+                <button onClick={signup} disabled={notAllow} class="bottomButton">회원가입</button>
             </div>
 
         </div>

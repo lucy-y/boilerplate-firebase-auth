@@ -1,11 +1,17 @@
-import Login from './component/Login';
+// eslint-disable-next-line
+import Hello from './component/Hello';
+//import Signup from './component/Signup';
 
 import './index.css';
+// eslint-disable-next-line
+import app from './firebase';
+import Router from './component/Router';
 
 function App() {
   return (
     <div>
-        <Login />
+        {/* <Hello name="lu" /> */}
+        <Router />
     </div>
   );
 }

@@ -26,7 +26,7 @@ class Clock extends React.Component {
     render() {
         return (
             <div>
-                <h1>Now: {this.state.date.toLocaleTimeString()}</h1>
+                <h2>Now: {this.state.date.toLocaleTimeString()}</h2>
             </div>
         )
     }

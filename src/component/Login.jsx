@@ -55,8 +55,7 @@ export default function Login() {
     return (
         <div className="page">
             <div class="titleWrap">
-                이메일과 비밀번호를<br />
-                입력해주세요
+                로그인
             </div>
 
             <div class="contentWrap">

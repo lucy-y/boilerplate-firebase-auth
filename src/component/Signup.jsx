@@ -61,7 +61,7 @@ export default function Signup() {
                 const user = userCredential.user;
                 console.log(user);
                 alert(`${email}님이 회원가입에 성공했습니다.`);
-                
+
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -74,8 +74,7 @@ export default function Signup() {
     return (
         <div className="page">
             <div class="titleWrap">
-                이메일과 비밀번호를<br />
-                입력해주세요
+                회원가입
             </div>
 
             <div class="contentWrap">

@@ -1,9 +1,11 @@
+import Login from './component/Login';
+
+import './index.css';
+
 function App() {
   return (
     <div>
-      <header>
-        <h1>App</h1>
-      </header>
+        <Login />
     </div>
   );
 }

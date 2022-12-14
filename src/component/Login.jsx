@@ -32,7 +32,7 @@ export default function Login() {
     const handlePassword = (e) => {
         setPassword(e.target.value);
         // eslint-disable-next-line
-        const regex = /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+])(?!.*[^a-zA-z0-9$`~!@$!%*#^?&\\(\\)\-_=+]).{6,20}$/;
+        const regex = /^(?=.*[0-9]).{6,20}$/;
         if (regex.test(e.target.value)) {
             setPasswordValid(true);
         } else {

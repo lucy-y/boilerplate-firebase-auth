@@ -4,7 +4,7 @@ import Hello from './component/Hello';
 
 import './index.css';
 // eslint-disable-next-line
-import app from './firebase';
+import app from './firebase/firebase';
 import Router from './component/Router';
 
 function App() {
